@@ -249,7 +249,7 @@ public class SpawnWorld implements Listener{
 	      player.getLocation().getWorld().playSound(player.getLocation(), Sound.BAT_TAKEOFF, 1.0F, -5.0F);
 	        for (Player p : Bukkit.getOnlinePlayers())
 	            try {
-	              ParticleEffects.CLOUD.sendToPlayer(p, player.getLocation(), 1.0F, 1.0F, 1.0F, 1.0F, 40);
+	              ParticleEffects.CLOUD.sendToPlayer(p, player.getLocation(), 1.0F, 1.0F, 1.0F, 1.0F, 20);
 	            } catch (Exception e) {
 	              e.printStackTrace();
 	            }
