@@ -40,7 +40,7 @@ public class SpawnWorld implements Listener{
 
 	private World spawnWorld;
 	private WorldCreator creator;
-        private EnumSet blocked = EnumSet.of(Material.ANVIL,
+        private EnumSet<Material> blocked = EnumSet.of(Material.ANVIL,
                                              Material.BEACON,
                                              Material.BED,
                                              Material.BOAT,
@@ -202,7 +202,7 @@ public class SpawnWorld implements Listener{
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onExplode(EntityExplodeEvent e){
-		if(e.getEntity().getWorld().getName().equalsIgnoreCase("spawn")) e.blockList().clear();
+		if(e.getLocation().getWorld().getName().equalsIgnoreCase("spawn")) if(e.blockList() != null) e.blockList().clear();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
