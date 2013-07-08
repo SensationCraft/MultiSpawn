@@ -11,9 +11,11 @@ import org.bukkit.World.Environment;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -180,6 +182,21 @@ public class SpawnWorld implements Listener{
 				e.getEntity().teleport(this.spawnWorld.getSpawnLocation());
 		}
 	}
+        
+        @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+        public void onEntityDamage(EntityDamageEvent event)
+        {
+            Entity e = event.getEntity();
+            if(e instanceof Tameable)
+            {
+                if(((Tameable)e).getOwner() != null)
+                {
+                    event.setCancelled(true);
+                    event.setDamage(0.0);
+                }
+            }
+        }
+        
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerHunger(FoodLevelChangeEvent e){
 		if(e.getEntity().getWorld().getName().equalsIgnoreCase("spawn")) e.setCancelled(true);
